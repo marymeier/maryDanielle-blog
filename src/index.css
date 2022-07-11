@@ -1,3 +1,38 @@
+.navigation {
+  background-color: pink;
+  position: fixed;
+  top: 0;
+  width: 100%
+}
+
+.navigation li {
+  display: inline-block;
+  padding: 10px 20px;
+  overflow: hidden;
+  border-right: 1px solid white;
+}
+
+.navigation tab {
+  text-decoration: none;
+  text-align: center;
+  color: black;
+}
+
+.navigation li tab:hover {
+  background-color: rgb(136, 231, 136);
+  color: white;
+  padding: 5px;
+}
+
+h1 {
+  color:aquamarine;
+  text-align: center;
+}
+
+h2 {
+  text-align: center;
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
