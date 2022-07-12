@@ -1,46 +1,49 @@
-import {useState} from 'react';
-// create tsx and interface to specify title and post
-// interface blogPost with two String props title and post
+import React, {useState} from 'react';
 
-interface Blog {
-
+interface BlogProps {
+    name: string;
+    content: string;
 }
-const Blog: React.FC<GameProps> = props => {
-    const [blogPost, setBlogPost] = useState([{title:'title', post:'post'}])
-    // const [title, setTitle] = useState([]);
-    // const [post, setPost] = useState([]);
-    // const inputChangeHandler = (event) => {
-    //     setBlogPost({ [event.target.title]: event.target.post });
-    // };
 
-   return (
-    <div>
-        <h1>Create New Blogs</h1>
-        <div style={{backgroundColor: "grey" , width: 400, height: 300, margin: "auto" }}>
-            <form>
-                <h2>Blog Name 
+const Blog: React.FC<BlogProps> = props => {
+    const [blogPost, setBlogPost] = useState({name:'name', content:'content'})
+    const [blogList, setBlogList] = useState(string[]);
+
+    function handleSubmit(event: React.FormEvent<HTMLInputElement>) {
+        event.preventDefault();
+        setBlogList(blogList => [...blogList, blogPost]);
+    }
+
+    return (
+        <div>
+            <h1>Create New Blogs</h1>
+            <div style={{backgroundColor: "grey" , width: 400, height: 300, margin: "auto" }}>
+                <form onSubmit={handleSubmit}>
+                    <h2>Blog Name</h2>
                     <input 
-                    type="text"
-                    placeholder="Name your blog"
-                    value={blogPost}
-                    // add button to create the blog
-                    onChange={(e) => setBlogPost({...blogPost,title:e.target.value})}
+                        type="text"
+                        placeholder="Name your blog"
+                        value={blogPost.name}
+                        onChange={(e) => setBlogPost({...blogPost,name:e.target.value})}
                     />
-                </h2>
-            </form>
-            <form>
-                <h2>Blog Content 
+                    <h2>Blog Content</h2>
                     <input 
-                    type="text"
-                    placeholder="Write your post here"
-                    value={blogPost}
-                    onChange={(e) => setBlogPost({...blogPost,post:e.target.value})}                    />
-                </h2>
-            </form>
+                        type="text"
+                        placeholder="Write your post here"
+                        value={blogPost.content}
+                        onChange={(e) => setBlogPost({...blogPost,content:e.target.value})}                    
+                    />
+                    <div>
+                        <button type="submit">Submit Post </button>
+                        <input
+                            type="submit"
+                        />
+                    </div>
+                </form>
+            </div>
+            <p></p>
         </div>
-        <p></p>
-    </div>
-   ) 
+    ) 
 }
 
 export default Blog;
