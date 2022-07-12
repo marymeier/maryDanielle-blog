@@ -25,11 +25,12 @@
 }
 
 h1 {
-  color:aquamarine;
+  color:rgb(136, 231, 136);
   text-align: center;
 }
 
 h2 {
+  color: pink;
   text-align: center;
 }
 
