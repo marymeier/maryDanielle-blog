@@ -15,15 +15,15 @@ const Blog: React.FC<BlogProps> = props => {
     }
 
     // Creating a function to delete from the blogList when the button is clicked
-    function handleDelete(event: React.FormEvent<HTMLFormElement>) {
-        const title = event.target.getAttribute("title")
-        setBlogList(blogList.filter(item => item.title !== title));
-    }
+    // function handleDelete(event: any) {
+    //     const title = event.target.getAttribute("title")
+    //     setBlogList(blogList.filter(item => item.title !== title));
+    // }
 
     return (
         <div>
             <h1>Create New Blogs</h1>
-            <div style={{backgroundColor: "grey" , width: 400, height: 300, margin: "auto" }}>
+            <div style={{backgroundColor: "#f4f0ec" , width: 400, height: 300, margin: "auto" }}>
                 <form onSubmit={handleSubmit}>
                     <h2>Blog Name</h2>
                     <input 
@@ -44,16 +44,20 @@ const Blog: React.FC<BlogProps> = props => {
                             type="submit"
                             value="Submit Post"
                         />
-                        {blogList.map(({title, content}) => (
-                            <p key={title}>{title}: {content}</p>
-                        ))}
                     </div>
-                    <div>
-                        <button onClick={() => handleDelete}>Delete Post</button>
-                        {/* <button onClick={() => onDelete(props.id)}>Delete</button> */}
-                    </div>
+                    
                 </form>
+                
             </div>
+            <div className="list">
+                {blogList.map(({title, content}) => (
+                <p className="active" key={title}>{title}: {content}</p>
+            ))}
+            </div>
+            {/* <div>
+                <button onClick={() => handleDelete}>Delete Post</button>
+                <button onClick={() => onDelete(props.id)}>Delete</button>
+            </div> */}
         </div>
     ) 
 }
