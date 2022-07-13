@@ -1,17 +1,23 @@
 import React, {useState} from 'react';
 
 interface BlogProps {
-    name: string;
+    title: string;
     content: string;
 }
 
 const Blog: React.FC<BlogProps> = props => {
-    const [blogPost, setBlogPost] = useState({name:'name', content:'content'})
-    const [blogList, setBlogList] = useState(string[]);
+    const [blogPost, setBlogPost] = useState({title:'', content:''})
+    const [blogList, setBlogList] = useState<any[]>([]);
 
-    function handleSubmit(event: React.FormEvent<HTMLInputElement>) {
+    function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
         event.preventDefault();
-        setBlogList(blogList => [...blogList, blogPost]);
+        setBlogList(blogList => [...blogList, blogPost]); 
+    }
+
+    // Creating a function to delete from the blogList when the button is clicked
+    function handleDelete(event: React.FormEvent<HTMLFormElement>) {
+        const title = event.target.getAttribute("title")
+        setBlogList(blogList.filter(item => item.title !== title));
     }
 
     return (
@@ -23,8 +29,8 @@ const Blog: React.FC<BlogProps> = props => {
                     <input 
                         type="text"
                         placeholder="Name your blog"
-                        value={blogPost.name}
-                        onChange={(e) => setBlogPost({...blogPost,name:e.target.value})}
+                        value={blogPost.title}
+                        onChange={(e) => setBlogPost({...blogPost,title:e.target.value})}
                     />
                     <h2>Blog Content</h2>
                     <input 
@@ -34,14 +40,20 @@ const Blog: React.FC<BlogProps> = props => {
                         onChange={(e) => setBlogPost({...blogPost,content:e.target.value})}                    
                     />
                     <div>
-                        <button type="submit">Submit Post </button>
                         <input
                             type="submit"
+                            value="Submit Post"
                         />
+                        {blogList.map(({title, content}) => (
+                            <p key={title}>{title}: {content}</p>
+                        ))}
+                    </div>
+                    <div>
+                        <button onClick={() => handleDelete}>Delete Post</button>
+                        {/* <button onClick={() => onDelete(props.id)}>Delete</button> */}
                     </div>
                 </form>
             </div>
-            <p></p>
         </div>
     ) 
 }
